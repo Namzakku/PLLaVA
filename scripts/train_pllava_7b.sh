@@ -5,7 +5,7 @@ export PYTHONPATH=${PYTHONPATH}:${which_python}
 export PYTHONPATH=${PYTHONPATH}:.
 echo "PYTHONPATH: ${PYTHONPATH}"
 
-OUTPUT_DIR=./pllava_video_outputs/test_train_7b_reconstruct
+OUTPUT_DIR=/workspace/outputs
 
 pooling_shape=(16,12,12)
 num_save_samples=80000
@@ -18,7 +18,7 @@ gradient_accumulation_steps=$[$full_batch_size/($batch_size*$num_gpus)]
 echo $batch_size
 echo $gradient_accumulation_steps
 repo_id=llava-hf/llava-v1.6-vicuna-7b-hf
-accelerate launch --main_process_port 6876 --config_file scripts/accel_config_multigpu.yaml tasks/train/train_pllava_nframe_accel.py  \
+accelerate launch --main_process_port 6876 --config_file scripts/accel_config_singlegpu.yaml tasks/train/train_pllava_nframe_accel.py  \
     tasks/train/config_pllava_nframe.py \
     output_dir ${OUTPUT_DIR} \
     train_corpus videochat2_instruction_debug \
