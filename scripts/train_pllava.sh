@@ -5,7 +5,7 @@ export PYTHONPATH=${PYTHONPATH}:${which_python}
 export PYTHONPATH=${PYTHONPATH}:.
 echo "PYTHONPATH: ${PYTHONPATH}"
 
-OUTPUT_DIR=./pllava_video_outputs/test_train_7b_reconstruct
+OUTPUT_DIR=/workspace/shotdeck-train-outputs
 
 # # Naive Env
 # rm -rf ${OUTPUT_DIR}
@@ -18,7 +18,7 @@ accelerate launch --main_process_port 6876 --config_file scripts/accel_config_mu
     num_workers 8 \
     num_frames 16 \
     model.pooling_method avg \
-    model.repo_id llava-hf/llava-v1.6-vicuna-7b-hf \
+    model.repo_id /workspace/models/llava-7b\
     model.use_lora True \
     model.pooling_shape $pooling_shape \
     optimizer.lr 2e-5 \

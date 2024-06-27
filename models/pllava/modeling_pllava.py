@@ -378,6 +378,7 @@ class PllavaForConditionalGeneration(PllavaPreTrainedModel):
         # 5. Fill the embeddings corresponding to the images. Anything that is still zeros needs filling
         image_to_overwrite = torch.all(final_embedding == 0, dim=-1)
         image_to_overwrite &= image_to_overwrite.cumsum(-1) > nb_image_pad[:, None].to(target_device)
+        image_to_overwrite = (image_to_overwrite.cumsum(-1) <=  num_special_image_tokens.max() * num_image_patches - nb_image_pad[:, None]) & image_to_overwrite
 
         # # somthing really weird here.
         # temp1 = (image_to_overwrite.cumsum(-1) > nb_image_pad[:, None].to(target_device)) & image_to_overwrite

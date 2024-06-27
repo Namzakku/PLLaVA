@@ -37,8 +37,8 @@ inputs = dict(
 
 # ========================= model ==========================
 model = dict(
-    repo_id="llava-hf/llava-v1.6-vicuna-7b-hf",
-    pretrained_path=None,
+    repo_id="/workspace/models/llava-7b",
+    pretrained_path="/workspace/models/pllava-7b",
     load_from_origin=False,
     origin_vision="",
     origin_llm="",
